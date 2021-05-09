@@ -1,5 +1,13 @@
 # flutter_google_places_hoc081098 changelog
 
+## 1.0.0-nullsafety.2 - May 9, 2021
+
+-   Update dependencies to latest release
+    -   `google_maps_webservice: ^0.0.20-nullsafety.5`
+    -   `http: ^0.13.3`
+    -   `rxdart: ^0.27.0`
+    -   `listenable_stream: ^1.1.0`
+
 ## 1.0.0-nullsafety.1 - Apr 02, 2021
 
 -   Add `headers` param to `PlacesAutocomplete.show`, `PlacesAutocompleteWidget`, `PlacesAutocompleteField` and `PlacesAutocompleteFormField`.
