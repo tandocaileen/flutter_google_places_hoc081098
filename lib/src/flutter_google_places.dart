@@ -33,6 +33,12 @@ class PlacesAutocompleteWidget extends StatefulWidget {
   final Duration? debounce;
   final Map<String, String>? headers;
 
+  /// Decoration for search text field
+  final InputDecoration? textDecoration;
+
+  /// Text style for search text field
+  final TextStyle? textStyle;
+
   /// optional - sets 'proxy' value in google_maps_webservice
   ///
   /// In case of using a proxy the baseUrl can be set.
@@ -68,7 +74,9 @@ class PlacesAutocompleteWidget extends StatefulWidget {
       this.httpClient,
       this.startText,
       this.debounce,
-      this.headers})
+      this.headers,
+      this.textDecoration,
+      this.textStyle})
       : super(key: key) {
     if (apiKey == null && proxyBaseUrl == null) {
       throw ArgumentError(
@@ -92,8 +100,11 @@ class _PlacesAutocompleteScaffoldState extends PlacesAutocompleteState {
   @override
   Widget build(BuildContext context) {
     final appBar = AppBar(
-        title: AppBarPlacesAutoCompleteTextField(
-            textDecoration: null, textStyle: null));
+      title: AppBarPlacesAutoCompleteTextField(
+        textDecoration: widget.textDecoration,
+        textStyle: widget.textStyle,
+      ),
+    );
     final body = PlacesAutocompleteResult(
       onTap: Navigator.of(context).pop,
       logo: widget.logo,
@@ -241,8 +252,11 @@ class _Loader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        constraints: BoxConstraints(maxHeight: 2.0),
-        child: LinearProgressIndicator());
+      constraints: BoxConstraints(maxHeight: 2.0),
+      child: LinearProgressIndicator(
+        color: Theme.of(context).colorScheme.secondary,
+      ),
+    );
   }
 }
 
@@ -302,7 +316,7 @@ class _AppBarPlacesAutoCompleteTextFieldState
 
     return Container(
         alignment: Alignment.topLeft,
-        margin: EdgeInsets.only(top: 4.0),
+        margin: EdgeInsets.only(top: 2.0),
         child: TextField(
           controller: state._queryTextController,
           autofocus: true,
@@ -551,7 +565,7 @@ class _SearchState {
       '_SearchState{text: $text, isSearching: $isSearching, response: $response}';
 }
 
-class PlacesAutocomplete {
+abstract class PlacesAutocomplete {
   static Future<Prediction?> show(
       {required BuildContext context,
       required String? apiKey,
@@ -574,7 +588,9 @@ class PlacesAutocomplete {
       String? startText,
       Duration? debounce,
       Location? origin,
-      Map<String, String>? headers}) {
+      Map<String, String>? headers,
+      InputDecoration? textDecoration,
+      TextStyle? textStyle}) {
     final builder = (BuildContext context) => PlacesAutocompleteWidget(
           apiKey: apiKey,
           mode: mode,
@@ -597,6 +613,8 @@ class PlacesAutocomplete {
           debounce: debounce,
           origin: origin,
           headers: headers,
+          textDecoration: textDecoration,
+          textStyle: textStyle,
         );
 
     if (mode == Mode.overlay) {
