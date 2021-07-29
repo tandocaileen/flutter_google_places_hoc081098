@@ -39,6 +39,8 @@ class PlacesAutocompleteWidget extends StatefulWidget {
   /// Text style for search text field
   final TextStyle? textStyle;
 
+  final Color? cursorColor;
+
   /// optional - sets 'proxy' value in google_maps_webservice
   ///
   /// In case of using a proxy the baseUrl can be set.
@@ -76,7 +78,8 @@ class PlacesAutocompleteWidget extends StatefulWidget {
       this.debounce,
       this.headers,
       this.textDecoration,
-      this.textStyle})
+      this.textStyle,
+      this.cursorColor})
       : super(key: key) {
     if (apiKey == null && proxyBaseUrl == null) {
       throw ArgumentError(
@@ -103,6 +106,7 @@ class _PlacesAutocompleteScaffoldState extends PlacesAutocompleteState {
       title: AppBarPlacesAutoCompleteTextField(
         textDecoration: widget.textDecoration,
         textStyle: widget.textStyle,
+        cursorColor: widget.cursorColor,
       ),
     );
     final body = PlacesAutocompleteResult(
@@ -298,10 +302,14 @@ class PlacesAutocompleteResult extends StatelessWidget {
 class AppBarPlacesAutoCompleteTextField extends StatefulWidget {
   final InputDecoration? textDecoration;
   final TextStyle? textStyle;
+  final Color? cursorColor;
 
-  AppBarPlacesAutoCompleteTextField(
-      {Key? key, required this.textDecoration, required this.textStyle})
-      : super(key: key);
+  AppBarPlacesAutoCompleteTextField({
+    Key? key,
+    required this.textDecoration,
+    required this.textStyle,
+    required this.cursorColor,
+  }) : super(key: key);
 
   @override
   _AppBarPlacesAutoCompleteTextFieldState createState() =>
@@ -323,6 +331,7 @@ class _AppBarPlacesAutoCompleteTextFieldState
           style: widget.textStyle ?? _defaultStyle(),
           decoration:
               widget.textDecoration ?? _defaultDecoration(state.widget.hint),
+          cursorColor: widget.cursorColor,
         ));
   }
 
@@ -590,7 +599,8 @@ abstract class PlacesAutocomplete {
       Location? origin,
       Map<String, String>? headers,
       InputDecoration? textDecoration,
-      TextStyle? textStyle}) {
+      TextStyle? textStyle,
+      Color? cursorColor}) {
     final builder = (BuildContext context) => PlacesAutocompleteWidget(
           apiKey: apiKey,
           mode: mode,
@@ -615,6 +625,7 @@ abstract class PlacesAutocomplete {
           headers: headers,
           textDecoration: textDecoration,
           textStyle: textStyle,
+          cursorColor: cursorColor,
         );
 
     if (mode == Mode.overlay) {
