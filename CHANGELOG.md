@@ -1,5 +1,9 @@
 # flutter_google_places_hoc081098 changelog
 
+## 1.0.0-nullsafety.5 - Sep 23, 2021
+
+- Set Flutter constraint `>=2.2.0`.
+
 ## 1.0.0-nullsafety.4 - Jul 29, 2021
 
 - Add `Color? cursorColor` param to `PlacesAutocomplete.show` and `PlacesAutocompleteWidget`:
