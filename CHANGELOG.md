@@ -1,6 +1,6 @@
 # flutter_google_places_hoc081098 changelog
 
-## 1.1.0 - TODO
+## 1.1.0 - Jun 20, 2022
 
 - Update dependencies
   - `google_api_headers: ^1.3.0`.
