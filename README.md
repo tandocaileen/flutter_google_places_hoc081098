@@ -9,6 +9,7 @@ Google places autocomplete widgets for flutter.
 
 [![Pub](https://img.shields.io/pub/v/flutter_google_places_hoc081098?include_prereleases)](https://pub.dev/packages/flutter_google_places_hoc081098)
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fhoc081098%2Fflutter_google_places&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
+[![Build example](https://github.com/hoc081098/flutter_google_places/actions/workflows/build-example.yml/badge.svg?branch=main)](https://github.com/hoc081098/flutter_google_places/actions/workflows/build-example.yml)
 
 - Migrated to **null-safety**.
 - Updated dependencies to latest release.
