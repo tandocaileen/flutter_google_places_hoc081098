@@ -6,7 +6,6 @@
   - `google_api_headers: ^1.3.0`.
   - `rxdart: ^0.27.4`.
   - `rxdart_ext: ^0.2.2`.
-  - `collection: ^1.16.0`.
 
 - Update `Flutter` constraint to `'>=2.8.0'`.
 
