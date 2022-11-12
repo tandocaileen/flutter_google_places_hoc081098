@@ -2,12 +2,15 @@ library flutter_google_places_hoc081098.src;
 
 import 'dart:async';
 
+import 'package:cancellation_token_hoc081098/cancellation_token_hoc081098.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc_pattern/flutter_bloc_pattern.dart';
 import 'package:google_api_headers/google_api_headers.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:http/http.dart';
 import 'package:listenable_stream/listenable_stream.dart';
+import 'package:rxdart_ext/single.dart';
 import 'package:rxdart_ext/state_stream.dart';
 
 class PlacesAutocompleteWidget extends StatefulWidget {
@@ -175,11 +178,9 @@ class _PlacesAutocompleteOverlayState extends PlacesAutocompleteState {
           header,
           Padding(
             padding: const EdgeInsets.only(top: 48.0),
-            child: StreamBuilder<_SearchState>(
+            child: RxStreamBuilder<_SearchState>(
               stream: _state$,
-              initialData: _state$.value,
-              builder: (context, snapshot) {
-                final state = snapshot.requireData;
+              builder: (context, state) {
                 final response = state.response;
 
                 if (state.isSearching) {
@@ -290,11 +291,9 @@ class PlacesAutocompleteResult extends StatelessWidget {
   Widget build(BuildContext context) {
     final state = PlacesAutocompleteWidget.of(context);
 
-    return StreamBuilder<_SearchState>(
+    return RxStreamBuilder<_SearchState>(
       stream: state._state$,
-      initialData: state._state$.value,
-      builder: (context, snapshot) {
-        final state = snapshot.requireData;
+      builder: (context, state) {
         final response = state.response;
 
         if (state.text.isEmpty ||
@@ -448,27 +447,35 @@ abstract class PlacesAutocompleteState extends State<PlacesAutocompleteWidget> {
           extentOffset: widget.startText?.length ?? 0,
         );
 
-  late final StateConnectableStream<_SearchState> _state$;
+  late final StateConnectableStream<_SearchState> _state$ =
+      getGoogleApiHeaders()
+          .exhaustMap(createGoogleMapsPlaces)
+          .exhaustMap(
+            (places) => _queryTextController
+                .toValueStream(replayValue: true)
+                .map((v) => v.text)
+                .debounceTime(
+                    widget.debounce ?? const Duration(milliseconds: 300))
+                .where((s) => s.isNotEmpty)
+                .distinct()
+                .switchMap((s) => doSearch(s, places)),
+          )
+          .publishState(const _SearchState(false, null, ''));
+
   StreamSubscription<void>? _subscription;
 
   @override
   void initState() {
     super.initState();
-
-    _state$ = Rx.fromCallable(const GoogleApiHeaders().getHeaders)
-        .exhaustMap(createGoogleMapsPlaces)
-        .exhaustMap(
-          (places) => _queryTextController
-              .toValueStream(replayValue: true)
-              .map((v) => v.text)
-              .debounceTime(
-                  widget.debounce ?? const Duration(milliseconds: 300))
-              .where((s) => s.isNotEmpty)
-              .distinct()
-              .switchMap((s) => doSearch(s, places)),
-        )
-        .publishState(const _SearchState(false, null, ''));
     _subscription = _state$.connect();
+  }
+
+  Single<Map<String, String>> getGoogleApiHeaders() {
+    return useCancellationToken((cancelToken) async {
+      final headers = await const GoogleApiHeaders().getHeaders();
+      cancelToken.guard();
+      return headers;
+    });
   }
 
   Stream<GoogleMapsPlaces> createGoogleMapsPlaces(Map<String, String> headers) {
@@ -504,7 +511,7 @@ abstract class PlacesAutocompleteState extends State<PlacesAutocompleteWidget> {
 
     assert(() {
       debugPrint(
-          '[flutter_google_places_hoc081098] input=$value location=${widget.location} origin=${widget.origin}');
+          '''[flutter_google_places_hoc081098] input='$value', location=${widget.location}, origin=${widget.origin}''');
       return true;
     }());
 
