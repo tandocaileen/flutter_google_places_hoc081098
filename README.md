@@ -40,6 +40,9 @@ dependencies:
 
 ## Simple usage
 
+
+According to https://stackoverflow.com/a/52545293, you need to enable billing on your account, even if you are only using the free quota.
+
 ```dart
 // replace flutter_google_places by flutter_google_places_hoc081098
 import 'package:flutter_google_places_hoc081098/flutter_google_places_hoc081098.dart';
