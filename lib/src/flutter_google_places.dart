@@ -2,7 +2,6 @@ library flutter_google_places_hoc081098.src;
 
 import 'dart:async';
 
-import 'package:cancellation_token_hoc081098/cancellation_token_hoc081098.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc_pattern/flutter_bloc_pattern.dart';
@@ -448,7 +447,7 @@ abstract class PlacesAutocompleteState extends State<PlacesAutocompleteWidget> {
         );
 
   late final StateConnectableStream<_SearchState> _state$ =
-      getGoogleApiHeaders()
+      Single.fromCallable(() => const GoogleApiHeaders().getHeaders())
           .exhaustMap(createGoogleMapsPlaces)
           .exhaustMap(
             (places) => _queryTextController
@@ -468,14 +467,6 @@ abstract class PlacesAutocompleteState extends State<PlacesAutocompleteWidget> {
   void initState() {
     super.initState();
     _subscription = _state$.connect();
-  }
-
-  Single<Map<String, String>> getGoogleApiHeaders() {
-    return useCancellationToken((cancelToken) async {
-      final headers = await const GoogleApiHeaders().getHeaders();
-      cancelToken.guard();
-      return headers;
-    });
   }
 
   Stream<GoogleMapsPlaces> createGoogleMapsPlaces(Map<String, String> headers) {
