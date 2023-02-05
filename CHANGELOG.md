@@ -1,5 +1,11 @@
 # flutter_google_places_hoc081098 changelog
 
+## 1.2.0 - Feb 5, 2023
+
+- Add `resultTextStyle`: used to change the style of `Text` of result.
+- Add `overlayBorderRadius`, `textStyle`, `textStyleFormField` to `PlacesAutocompleteField` and `PlacesAutocompleteFormField`.
+- Various docs improvements.
+
 ## 1.1.0 - Jun 20, 2022
 
 - Update dependencies
