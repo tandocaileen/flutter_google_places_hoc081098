@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_google_places_hoc081098/flutter_google_places_hoc081098.dart';
+import 'package:flutter_google_places_hoc081098/google_maps_webservice_places.dart';
 import 'package:google_api_headers/google_api_headers.dart';
-import 'package:google_maps_webservice/places.dart';
 
 import 'custom.dart';
 
@@ -28,6 +28,7 @@ final customTheme = ThemeData(
       horizontal: 10.00,
     ),
   ),
+  useMaterial3: true,
 );
 
 class RoutesWidget extends StatelessWidget {
@@ -123,10 +124,8 @@ class _MyAppState extends State<MyApp> {
       onError: onError,
       mode: _mode,
       language: 'fr',
-      components: [Component(Component.country, 'fr')],
-      // TODO: Since we supports Flutter >= 2.8.0
-      // ignore: deprecated_member_use
-      resultTextStyle: Theme.of(context).textTheme.subtitle1,
+      components: [const Component(Component.country, 'fr')],
+      resultTextStyle: Theme.of(context).textTheme.titleMedium,
     );
 
     await displayPrediction(p, ScaffoldMessenger.of(context));
