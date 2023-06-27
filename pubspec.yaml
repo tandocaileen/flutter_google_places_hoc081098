@@ -6,6 +6,23 @@ repository: https://github.com/hoc081098/flutter_google_places
 funding:
   - https://www.buymeacoffee.com/hoc081098
 
+topics:
+  - rxdart
+  - reactive-programming
+  - streams
+  - observables
+  - rx
+  - hoc081098
+  - google-places
+  - google-places-autocomplete
+  - flutter-google-places
+  - flutter-google-places-autocomplete
+  - flutter-google-places-autocomplete-widget
+  - flutter-google-places-autocomplete-textfield
+  - flutter-google-places-autocomplete-search
+  - flutter-google-places-autocomplete-search-bar
+  - places-autocomplete
+
 environment:
   sdk: '>=3.0.0 <4.0.0'
   flutter: '>=3.10.0'
