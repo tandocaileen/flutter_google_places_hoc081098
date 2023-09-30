@@ -28,10 +28,10 @@ Geometry _$GeometryFromJson(Map<String, dynamic> json) => Geometry(
     );
 
 Map<String, dynamic> _$GeometryToJson(Geometry instance) => <String, dynamic>{
-      'location': instance.location,
+      'location': instance.location.toJson(),
       'location_type': instance.locationType,
-      'viewport': instance.viewport,
-      'bounds': instance.bounds,
+      'viewport': instance.viewport?.toJson(),
+      'bounds': instance.bounds?.toJson(),
     };
 
 Bounds _$BoundsFromJson(Map<String, dynamic> json) => Bounds(
@@ -40,8 +40,8 @@ Bounds _$BoundsFromJson(Map<String, dynamic> json) => Bounds(
     );
 
 Map<String, dynamic> _$BoundsToJson(Bounds instance) => <String, dynamic>{
-      'northeast': instance.northeast,
-      'southwest': instance.southwest,
+      'northeast': instance.northeast.toJson(),
+      'southwest': instance.southwest.toJson(),
     };
 
 AddressComponent _$AddressComponentFromJson(Map<String, dynamic> json) =>

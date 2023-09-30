@@ -519,7 +519,12 @@ class GoogleMapsPlaces extends GoogleWebService {
           json.decode(res.body) as Map<String, dynamic>);
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake)
+const _jsonSerializable = JsonSerializable(
+  fieldRename: FieldRename.snake,
+  explicitToJson: true,
+);
+
+@_jsonSerializable
 @immutable
 class PlacesSearchResponse extends GoogleResponseStatus {
   @JsonKey(defaultValue: <Never>[])
@@ -545,7 +550,7 @@ class PlacesSearchResponse extends GoogleResponseStatus {
   Map<String, dynamic> toJson() => _$PlacesSearchResponseToJson(this);
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake)
+@_jsonSerializable
 @immutable
 class PlacesSearchResult {
   final String? icon;
@@ -612,7 +617,7 @@ class PlacesSearchResult {
   Map<String, dynamic> toJson() => _$PlacesSearchResultToJson(this);
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake)
+@_jsonSerializable
 @immutable
 class PlaceDetails {
   /// JSON address_components
@@ -702,7 +707,7 @@ class PlaceDetails {
   Map<String, dynamic> toJson() => _$PlaceDetailsToJson(this);
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake)
+@_jsonSerializable
 @immutable
 class OpeningHoursDetail {
   @JsonKey(defaultValue: false)
@@ -725,7 +730,7 @@ class OpeningHoursDetail {
   Map<String, dynamic> toJson() => _$OpeningHoursDetailToJson(this);
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake)
+@_jsonSerializable
 @immutable
 class OpeningHoursPeriodDate {
   final int day;
@@ -744,7 +749,7 @@ class OpeningHoursPeriodDate {
   Map<String, dynamic> toJson() => _$OpeningHoursPeriodDateToJson(this);
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake)
+@_jsonSerializable
 @immutable
 class OpeningHoursPeriod {
   final OpeningHoursPeriodDate? open;
@@ -757,7 +762,7 @@ class OpeningHoursPeriod {
   Map<String, dynamic> toJson() => _$OpeningHoursPeriodToJson(this);
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake)
+@_jsonSerializable
 @immutable
 class Photo {
   /// JSON photo_reference
@@ -780,7 +785,7 @@ class Photo {
   Map<String, dynamic> toJson() => _$PhotoToJson(this);
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake)
+@_jsonSerializable
 @immutable
 class AlternativeId {
   /// JSON place_id
@@ -812,7 +817,7 @@ enum PriceLevel {
   veryExpensive,
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake)
+@_jsonSerializable
 @immutable
 class PlacesDetailsResponse extends GoogleResponseStatus {
   final PlaceDetails result;
@@ -836,7 +841,7 @@ class PlacesDetailsResponse extends GoogleResponseStatus {
   Map<String, dynamic> toJson() => _$PlacesDetailsResponseToJson(this);
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake)
+@_jsonSerializable
 @immutable
 class Review {
   /// JSON author_name
@@ -874,7 +879,7 @@ class Review {
   Map<String, dynamic> toJson() => _$ReviewToJson(this);
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake)
+@_jsonSerializable
 @immutable
 class PlacesAutocompleteResponse extends GoogleResponseStatus {
   @JsonKey(defaultValue: <Prediction>[])
@@ -894,7 +899,7 @@ class PlacesAutocompleteResponse extends GoogleResponseStatus {
   Map<String, dynamic> toJson() => _$PlacesAutocompleteResponseToJson(this);
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake)
+@_jsonSerializable
 @immutable
 class Prediction {
   final String? description;
@@ -935,7 +940,7 @@ class Prediction {
   Map<String, dynamic> toJson() => _$PredictionToJson(this);
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake)
+@_jsonSerializable
 @immutable
 class Term {
   final num offset;
@@ -961,7 +966,7 @@ class Term {
   int get hashCode => offset.hashCode ^ value.hashCode;
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake)
+@_jsonSerializable
 @immutable
 class MatchedSubstring {
   final num offset;
@@ -988,7 +993,7 @@ class MatchedSubstring {
   int get hashCode => offset.hashCode ^ length.hashCode;
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake)
+@_jsonSerializable
 @immutable
 class StructuredFormatting {
   final String mainText;

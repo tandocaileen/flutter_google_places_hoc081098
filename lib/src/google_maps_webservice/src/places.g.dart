@@ -28,7 +28,7 @@ Map<String, dynamic> _$PlacesSearchResponseToJson(
     <String, dynamic>{
       'status': instance.status,
       'error_message': instance.errorMessage,
-      'results': instance.results,
+      'results': instance.results.map((e) => e.toJson()).toList(),
       'html_attributions': instance.htmlAttributions,
       'next_page_token': instance.nextPageToken,
     };
@@ -69,13 +69,13 @@ PlacesSearchResult _$PlacesSearchResultFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$PlacesSearchResultToJson(PlacesSearchResult instance) =>
     <String, dynamic>{
       'icon': instance.icon,
-      'geometry': instance.geometry,
+      'geometry': instance.geometry?.toJson(),
       'name': instance.name,
-      'opening_hours': instance.openingHours,
-      'photos': instance.photos,
+      'opening_hours': instance.openingHours?.toJson(),
+      'photos': instance.photos.map((e) => e.toJson()).toList(),
       'place_id': instance.placeId,
       'scope': instance.scope,
-      'alt_ids': instance.altIds,
+      'alt_ids': instance.altIds.map((e) => e.toJson()).toList(),
       'price_level': _$PriceLevelEnumMap[instance.priceLevel],
       'rating': instance.rating,
       'types': instance.types,
@@ -137,7 +137,8 @@ PlaceDetails _$PlaceDetailsFromJson(Map<String, dynamic> json) => PlaceDetails(
 
 Map<String, dynamic> _$PlaceDetailsToJson(PlaceDetails instance) =>
     <String, dynamic>{
-      'address_components': instance.addressComponents,
+      'address_components':
+          instance.addressComponents.map((e) => e.toJson()).toList(),
       'adr_address': instance.adrAddress,
       'formatted_address': instance.formattedAddress,
       'formatted_phone_number': instance.formattedPhoneNumber,
@@ -145,8 +146,8 @@ Map<String, dynamic> _$PlaceDetailsToJson(PlaceDetails instance) =>
       'reference': instance.reference,
       'icon': instance.icon,
       'name': instance.name,
-      'opening_hours': instance.openingHours,
-      'photos': instance.photos,
+      'opening_hours': instance.openingHours?.toJson(),
+      'photos': instance.photos.map((e) => e.toJson()).toList(),
       'place_id': instance.placeId,
       'international_phone_number': instance.internationalPhoneNumber,
       'price_level': _$PriceLevelEnumMap[instance.priceLevel],
@@ -157,8 +158,8 @@ Map<String, dynamic> _$PlaceDetailsToJson(PlaceDetails instance) =>
       'vicinity': instance.vicinity,
       'utc_offset': instance.utcOffset,
       'website': instance.website,
-      'reviews': instance.reviews,
-      'geometry': instance.geometry,
+      'reviews': instance.reviews.map((e) => e.toJson()).toList(),
+      'geometry': instance.geometry?.toJson(),
     };
 
 OpeningHoursDetail _$OpeningHoursDetailFromJson(Map<String, dynamic> json) =>
@@ -178,7 +179,7 @@ OpeningHoursDetail _$OpeningHoursDetailFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$OpeningHoursDetailToJson(OpeningHoursDetail instance) =>
     <String, dynamic>{
       'open_now': instance.openNow,
-      'periods': instance.periods,
+      'periods': instance.periods.map((e) => e.toJson()).toList(),
       'weekday_text': instance.weekdayText,
     };
 
@@ -210,8 +211,8 @@ OpeningHoursPeriod _$OpeningHoursPeriodFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$OpeningHoursPeriodToJson(OpeningHoursPeriod instance) =>
     <String, dynamic>{
-      'open': instance.open,
-      'close': instance.close,
+      'open': instance.open?.toJson(),
+      'close': instance.close?.toJson(),
     };
 
 Photo _$PhotoFromJson(Map<String, dynamic> json) => Photo(
@@ -260,7 +261,7 @@ Map<String, dynamic> _$PlacesDetailsResponseToJson(
     <String, dynamic>{
       'status': instance.status,
       'error_message': instance.errorMessage,
-      'result': instance.result,
+      'result': instance.result.toJson(),
       'html_attributions': instance.htmlAttributions,
     };
 
@@ -302,7 +303,7 @@ Map<String, dynamic> _$PlacesAutocompleteResponseToJson(
     <String, dynamic>{
       'status': instance.status,
       'error_message': instance.errorMessage,
-      'predictions': instance.predictions,
+      'predictions': instance.predictions.map((e) => e.toJson()).toList(),
     };
 
 Prediction _$PredictionFromJson(Map<String, dynamic> json) => Prediction(
@@ -332,13 +333,14 @@ Map<String, dynamic> _$PredictionToJson(Prediction instance) =>
     <String, dynamic>{
       'description': instance.description,
       'id': instance.id,
-      'terms': instance.terms,
+      'terms': instance.terms.map((e) => e.toJson()).toList(),
       'distance_meters': instance.distanceMeters,
       'place_id': instance.placeId,
       'reference': instance.reference,
       'types': instance.types,
-      'matched_substrings': instance.matchedSubstrings,
-      'structured_formatting': instance.structuredFormatting,
+      'matched_substrings':
+          instance.matchedSubstrings.map((e) => e.toJson()).toList(),
+      'structured_formatting': instance.structuredFormatting?.toJson(),
     };
 
 Term _$TermFromJson(Map<String, dynamic> json) => Term(
@@ -379,6 +381,7 @@ Map<String, dynamic> _$StructuredFormattingToJson(
         StructuredFormatting instance) =>
     <String, dynamic>{
       'main_text': instance.mainText,
-      'main_text_matched_substrings': instance.mainTextMatchedSubstrings,
+      'main_text_matched_substrings':
+          instance.mainTextMatchedSubstrings.map((e) => e.toJson()).toList(),
       'secondary_text': instance.secondaryText,
     };

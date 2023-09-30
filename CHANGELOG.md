@@ -1,5 +1,9 @@
 # flutter_google_places_hoc081098 changelog
 
+## 2.0.0-beta.1 - Sep 30, 2023
+
+- Chore: update generated files.
+
 ## 2.0.0-beta.0 - Jun 27, 2023
 
 - Requires `Dart 3.0` or later.

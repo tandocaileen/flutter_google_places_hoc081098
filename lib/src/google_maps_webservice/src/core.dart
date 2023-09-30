@@ -3,7 +3,12 @@ import 'package:meta/meta.dart';
 
 part 'core.g.dart';
 
-@JsonSerializable(fieldRename: FieldRename.snake)
+const _jsonSerializable = JsonSerializable(
+  fieldRename: FieldRename.snake,
+  explicitToJson: true,
+);
+
+@_jsonSerializable
 @immutable
 class Location {
   final double lat;
@@ -22,7 +27,7 @@ class Location {
   String toString() => '$lat,$lng';
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake)
+@_jsonSerializable
 @immutable
 class Geometry {
   final Location location;
@@ -46,7 +51,7 @@ class Geometry {
   Map<String, dynamic> toJson() => _$GeometryToJson(this);
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake)
+@_jsonSerializable
 @immutable
 class Bounds {
   final Location northeast;
@@ -108,7 +113,7 @@ abstract class GoogleResponse<T> extends GoogleResponseStatus {
       : super(status: status, errorMessage: errorMessage);
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake)
+@_jsonSerializable
 @immutable
 class AddressComponent {
   @JsonKey(defaultValue: <Never>[])
@@ -159,7 +164,7 @@ enum TravelMode {
   transit,
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake)
+@_jsonSerializable
 @immutable
 class _TravelMode {
   final TravelMode value;
@@ -169,6 +174,7 @@ class _TravelMode {
   // ignore: unused_element
   factory _TravelMode.fromJson(Map<String, dynamic> json) =>
       _$TravelModeFromJson(json);
+
   Map<String, dynamic> toJson() => _$TravelModeToJson(this);
 }
 
@@ -189,7 +195,7 @@ enum RouteType {
   indoor,
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake)
+@_jsonSerializable
 @immutable
 class _RouteType {
   final RouteType value;
@@ -217,7 +223,7 @@ enum Unit {
   imperial,
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake)
+@_jsonSerializable
 @immutable
 class _Unit {
   final Unit value;
@@ -246,7 +252,7 @@ enum TrafficModel {
   optimistic,
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake)
+@_jsonSerializable
 @immutable
 class _TrafficModel {
   final TrafficModel value;
@@ -277,7 +283,7 @@ enum TransitMode {
   rail,
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake)
+@_jsonSerializable
 @immutable
 class _TransitMode {
   final TransitMode value;
@@ -307,7 +313,7 @@ enum TransitRoutingPreferences {
   fewerTransfers,
 }
 
-@JsonSerializable(fieldRename: FieldRename.snake)
+@_jsonSerializable
 @immutable
 class _TransitRoutingPreferences {
   final TransitRoutingPreferences value;
@@ -317,6 +323,7 @@ class _TransitRoutingPreferences {
   // ignore: unused_element
   factory _TransitRoutingPreferences.fromJson(Map<String, dynamic> json) =>
       _$TransitRoutingPreferencesFromJson(json);
+
   Map<String, dynamic> toJson() => _$TransitRoutingPreferencesToJson(this);
 }
 
