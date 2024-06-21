@@ -1,5 +1,20 @@
 # flutter_google_places_hoc081098 changelog
 
+## 2.0.0 - Jun 21, 2024
+
+- Update Dart SDK constraint to `'>=3.3.4 <4.0.0'`.
+- Update Flutter SDK constraint to `'>=3.19.6'`.
+- Remove `google_maps_webservice` dependency.
+- Update dependencies
+  - `google_api_headers: ^4.0.3`.
+  - `http: ^1.2.1`.
+  - `rxdart: ^0.28.0`.
+  - `rxdart_ext: ^0.3.0`.
+  - `listenable_stream: ^2.0.1`.
+  - `collection: ^1.18.0`.
+  - `flutter_bloc_pattern: ^3.0.0`.
+  - `meta: ^1.11.0`.
+
 ## 2.0.0-beta.1 - Sep 30, 2023
 
 - Fix: update generated files.
